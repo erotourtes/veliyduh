@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://u6qntdnasaq0"]
+
+[ext_resource type="Script" uid="uid://c83dt6y8g4sn5" path="res://scenes/guns/magnum/magnum.gd" id="1_cpn2h"]
+[ext_resource type="Script" uid="uid://na6bgqieisqu" path="res://scenes/guns/weapon_resource.gd" id="1_jav8m"]
+[ext_resource type="Texture2D" uid="uid://ciy0yfo1anwl8" path="res://assets/sprites/guns/magnum.png" id="2_6vfmj"]
+[ext_resource type="PackedScene" uid="uid://bagu25ev6jwes" path="res://scenes/guns/magnum/bullet.tscn" id="2_kkfab"]
+
+[resource]
+script = ExtResource("1_jav8m")
+name = &"magnum"
+position = Vector2(40, -5)
+sprite = ExtResource("2_6vfmj")
+fireScript = ExtResource("1_cpn2h")
+projectile = ExtResource("2_kkfab")
+metadata/_custom_type_script = "uid://na6bgqieisqu"
