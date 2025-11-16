@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5b6db7p2220i"]
+[gd_scene load_steps=4 format=3 uid="uid://b5b6db7p2220i"]
 
 [ext_resource type="Script" uid="uid://c83dt6y8g4sn5" path="res://scenes/guns/magnum/magnum.gd" id="1_7pms1"]
 [ext_resource type="Texture2D" uid="uid://ciy0yfo1anwl8" path="res://assets/sprites/guns/magnum.png" id="1_dfgxd"]
+[ext_resource type="AudioStream" uid="uid://c87kuxg6dhlla" path="res://assets/audio/sounds/magnum.wav" id="3_niotu"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 4
@@ -16,3 +17,7 @@ polygon = PackedVector2Array(23, 0, 72, -25, 79, -42, 118, -43, 119, -60, 30, -6
 
 [node name="muzzle" type="Marker2D" parent="."]
 position = Vector2(120, -51)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_niotu")
+volume_db = -27.276

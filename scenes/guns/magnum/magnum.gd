@@ -5,6 +5,7 @@ const SCENE = preload("uid://b5b6db7p2220i")
 const BULLET = preload("uid://bagu25ev6jwes")
 
 @onready var muzzle: Marker2D = $muzzle
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var isFiring := false
 
@@ -39,6 +40,8 @@ func start_firing():
 	if (player.playerDirection < 0):
 		bullet.scale.x = -1
 	bullet.direction = dirVec
+	
+	audio_stream_player.play()
 	
 	
 	stop_firing()
