@@ -1,10 +1,16 @@
-[gd_scene load_steps=9 format=4 uid="uid://b783vko3i68tg"]
+[gd_scene load_steps=12 format=4 uid="uid://b783vko3i68tg"]
 
 [ext_resource type="PackedScene" uid="uid://cptygp7bqik5p" path="res://scenes/characters/main_player/main_player.tscn" id="1_uwrxv"]
+[ext_resource type="FontFile" uid="uid://cqhyrvjf2fuoy" path="res://assets/fonts/GamepauseddemoRegular-RpmY6.ttf" id="2_p57ef"]
 [ext_resource type="Texture2D" uid="uid://c62x65ghn5eyo" path="res://assets/sprites/blocks/SpookyTileset.png" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://bkgj8qpcyct1r" path="res://assets/sprites/blocks/WoodScaffolding.png" id="3_lnu2h"]
+[ext_resource type="Script" uid="uid://bgh8uctivxuq4" path="res://scenes/score.gd" id="3_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://jba7jy3f42ll" path="res://scenes/characters/enemy.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://c4rs8re8iqp4a" path="res://scenes/enemies.gd" id="5_p57ef"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u5sy4"]
+font = ExtResource("2_p57ef")
+font_size = 160
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -236,6 +242,16 @@ metadata/_edit_lock_ = true
 position = Vector2(1076, -2183)
 bulletContainer = NodePath("../bullets_container")
 
+[node name="score" type="Label" parent="main_player"]
+offset_left = 2359.0
+offset_top = 1402.0
+offset_right = 3162.0
+offset_bottom = 1563.0
+text = "0"
+label_settings = SubResource("LabelSettings_u5sy4")
+horizontal_alignment = 2
+script = ExtResource("3_u5sy4")
+
 [node name="Camera2D" type="Camera2D" parent="main_player"]
 position = Vector2(18, -174)
 zoom = Vector2(0.1, 0.1)
@@ -279,3 +295,5 @@ position = Vector2(-973, -1393)
 
 [node name="8" type="Marker2D" parent="enemies/positions_container"]
 position = Vector2(-1934, -419)
+
+[connection signal="score" from="enemies" to="main_player/score" method="_on_enemies_score"]

@@ -8,6 +8,14 @@ extends Node
 @export var max_enemies := 5                   # total alive at once
 @export var enemy_lifetime := 8.0              # auto-despawn time
 
+signal score(score: int)
+
+var scoreCounter := 0:
+	set(value):
+		scoreCounter = value
+		score.emit(value)
+
+
 var positions: Array[Marker2D] = []
 var free_positions: Array[Marker2D] = []
 var occupied_positions := {}   # enemy -> marker
@@ -54,18 +62,21 @@ func spawn_enemy():
 	occupied_positions[enemy] = pos
 	
 	await get_tree().create_timer(enemy_lifetime).timeout
-	_on_enemy_died(enemy)
+	handle_remove_enemy(enemy)
 	if enemy != null and not enemy.is_queued_for_deletion():
 		enemy.queue_free()
-	
 
-func _on_enemy_died(enemy):
-	# free the spawn slot
+func handle_remove_enemy(enemy):
 	if occupied_positions.has(enemy):
 		var pos = occupied_positions[enemy]
 		occupied_positions.erase(enemy)
 		await get_tree().create_timer(1.0).timeout
 		free_positions.append(pos)
+
+func _on_enemy_died(enemy):
+	handle_remove_enemy(enemy)
+	scoreCounter += 1
+	
 		
 
 #func cleanup():
