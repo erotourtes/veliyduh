@@ -92,11 +92,12 @@ func take_damage():
 	
 func handlePick():
 	if weapon != null:
-		for child in weaponNode.get_children():
-			weaponNode.remove_child(child)
-			
-		weapon.desintegrate()
+		var curWeapon = weapon
 		weapon = null
+		weaponNode.remove_child(curWeapon)
+		bulletContainer.add_child(curWeapon)
+		curWeapon.global_position = global_position
+		curWeapon.activate_physics_for_throw(Vector2(playerDirection, 0.0), velocity)
 		return
 	
 	var scene = Magnum.SCENE.instantiate()

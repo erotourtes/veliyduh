@@ -6,8 +6,10 @@ const BULLET = preload("uid://bagu25ev6jwes")
 
 @onready var muzzle: Marker2D = $muzzle
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var no_ammo: AudioStreamPlayer2D = $no_ammo
 
 var isFiring := false
+var ammoAmount := 20
 
 const HAND_ALIGNMENT = Vector2(
 	-20,
@@ -27,7 +29,13 @@ func get_hand_alighnemnt() -> Vector2:
 	return HAND_ALIGNMENT
 
 func start_firing():
+	if ammoAmount <= 0:
+		no_ammo.play()
+		return
+		
 	isFiring = true
+	ammoAmount -= 1
+	
 	var recoilForce = Vector2(RECOIL_FORCE)
 	recoilForce.x *= player.playerDirection	
 	player.recoilForce = recoilForce

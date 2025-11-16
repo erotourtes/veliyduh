@@ -362,31 +362,34 @@ offset_bottom = 2223.0
 [node name="smoke" type="ColorRect" parent="main_player/Control"]
 material = SubResource("ShaderMaterial_ir15t")
 layout_mode = 0
-offset_left = -2103.0
-offset_top = -4183.0
-offset_right = 4280.0
-offset_bottom = -605.0
+offset_left = -2337.0
+offset_top = -4405.0
+offset_right = 4556.0
+offset_bottom = -254.0
 color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
 
 [node name="blur" type="ColorRect" parent="main_player/Control"]
 visible = false
 material = SubResource("ShaderMaterial_ssvqc")
 layout_mode = 0
-offset_left = -2128.0
-offset_top = -4128.0
-offset_right = 4255.0
-offset_bottom = -550.0
+offset_left = -2280.0
+offset_top = -4289.0
+offset_right = 4470.0
+offset_bottom = -425.0
 color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
 
 [node name="woble" type="ColorRect" parent="main_player/Control"]
 visible = false
 material = SubResource("ShaderMaterial_rysoc")
 layout_mode = 0
-offset_left = -2112.0
-offset_top = -4122.0
-offset_right = 4271.0
-offset_bottom = -544.0
+offset_left = -2479.0
+offset_top = -4436.0
+offset_right = 4503.0
+offset_bottom = -222.0
 color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
 
 [node name="score" parent="main_player/Control" instance=ExtResource("13_trtic")]
 visible = false

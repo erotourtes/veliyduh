@@ -1382,7 +1382,6 @@ metadata/_edit_lock_ = true
 position = Vector2(0, -183)
 sprite_frames = SubResource("SpriteFrames_gv8u8")
 animation = &"moving_body"
-frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="visuals/body"]
 root_node = NodePath("../../..")
@@ -1404,7 +1403,6 @@ position = Vector2(-25, 86)
 [node name="hand" type="AnimatedSprite2D" parent="visuals/hand_anchor"]
 sprite_frames = SubResource("SpriteFrames_hafb0")
 animation = &"idle_body_idle_hand"
-frame = 2
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
