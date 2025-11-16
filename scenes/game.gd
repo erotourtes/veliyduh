@@ -24,6 +24,11 @@ var gameResult = EndResult.new()
 func _ready() -> void:
 	timer.endTime = 1 * 60
 	timer.stopped = false
+	
+	background.volume_db = -60
+	background.play()
+	var tween = get_tree().create_tween()
+	tween.tween_property(background, "volume_db", -20, 2.0)
 	background.play()
 	
 func handle_game_over() -> void:

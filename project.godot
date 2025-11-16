@@ -11,8 +11,10 @@ config_version=5
 [application]
 
 config/name="Game1"
-run/main_scene="uid://b783vko3i68tg"
+run/main_scene="uid://ttj3p2qyr6ac"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/bg_color=Color(0.14901961, 0.03529412, 0.1254902, 1)
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]
