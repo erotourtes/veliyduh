@@ -50,9 +50,9 @@ shader_parameter/overall_tint_color = Color(0, 0, 0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rysoc"]
 shader = ExtResource("8_ca42v")
 shader_parameter/wobble_speed = 1.6340000743551202
-shader_parameter/wobble_strength = 0.0250000011875
-shader_parameter/wobble_scale = 9.3450003963875
-shader_parameter/tint_alpha = 0.2
+shader_parameter/wobble_strength = 0.0
+shader_parameter/wobble_scale = 5.6150002192125
+shader_parameter/tint_alpha = 0.0
 shader_parameter/tint_color = Color(0, 0, 0, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
@@ -301,11 +301,10 @@ volume_db = -20.0
 mix_target = 1
 
 [node name="background" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
 
 [node name="1" type="Parallax2D" parent="background"]
 repeat_size = Vector2(8000, 6000)
-repeat_times = 2
+repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="background/1"]
 position = Vector2(1302.9995, -1353.001)
@@ -314,7 +313,7 @@ texture = ExtResource("2_ca42v")
 
 [node name="3" type="Parallax2D" parent="background"]
 repeat_size = Vector2(8000, 6000)
-repeat_times = 2
+repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="background/3"]
 position = Vector2(1302.9995, -1353.001)
@@ -324,6 +323,10 @@ texture = ExtResource("14_trtic")
 [node name="main_player" parent="." node_paths=PackedStringArray("bulletContainer") instance=ExtResource("1_uwrxv")]
 position = Vector2(1076, -2183)
 bulletContainer = NodePath("../bullets_container")
+
+[node name="DieFromPoisonTimer" type="Timer" parent="main_player"]
+
+[node name="PoisonTimer" type="Timer" parent="main_player"]
 
 [node name="timer" type="Label" parent="main_player"]
 offset_left = 2329.0
@@ -381,7 +384,6 @@ color = Color(1, 1, 1, 0)
 metadata/_edit_lock_ = true
 
 [node name="woble" type="ColorRect" parent="main_player/Control"]
-visible = false
 material = SubResource("ShaderMaterial_rysoc")
 layout_mode = 0
 offset_left = -2479.0
@@ -449,6 +451,8 @@ position = Vector2(1230, 1184)
 shape = SubResource("WorldBoundaryShape2D_264po")
 
 [connection signal="died" from="main_player" to="." method="_on_main_player_died"]
+[connection signal="poisonedSignal" from="main_player" to="." method="_on_main_player_poisoned_signal"]
+[connection signal="timeout" from="main_player/PoisonTimer" to="." method="_on_poison_timer_timeout"]
 [connection signal="ended" from="main_player/timer" to="." method="_on_timer_ended"]
 [connection signal="score" from="enemies" to="." method="_on_enemies_score"]
 [connection signal="score" from="enemies" to="main_player/score" method="_on_enemies_score"]

@@ -14,6 +14,7 @@ var JUMP_VELOCITY := -225 * PIXEL_MULTIPILER
 @onready var weaponNode: Node2D = $visuals/hand_anchor/Weapon
 
 signal died
+signal poisonedSignal
 
 var isFlying := false
 var weapon: WeaponBase = null
@@ -89,7 +90,10 @@ func handleFire():
 	
 func take_damage():
 	died.emit()	
-	
+
+func poison():
+	poisonedSignal.emit()
+
 func handlePick():
 	if weapon != null:
 		var curWeapon = weapon
