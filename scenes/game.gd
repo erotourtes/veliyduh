@@ -7,6 +7,7 @@ class EndResult:
 @onready var lose: AudioStreamPlayer = $audio/lose
 @onready var win: AudioStreamPlayer = $audio/win
 @onready var timer: Label = $main_player/timer
+@onready var background: AudioStreamPlayer = $audio/background
 
 @onready var control: Control = $main_player/Control
 @onready var smoke: ColorRect = $main_player/Control/smoke
@@ -21,10 +22,12 @@ class EndResult:
 var gameResult = EndResult.new()
 
 func _ready() -> void:
-	timer.endTime = 1 * 3
+	timer.endTime = 1 * 60
 	timer.stopped = false
+	background.play()
 	
 func handle_game_over() -> void:
+	background.stop()
 	get_tree().paused = true
 		
 	smoke.visible = false

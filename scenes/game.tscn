@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://b783vko3i68tg"]
+[gd_scene load_steps=28 format=4 uid="uid://b783vko3i68tg"]
 
 [ext_resource type="Script" uid="uid://f213ecb46ptc" path="res://scenes/game.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cptygp7bqik5p" path="res://scenes/characters/main_player/main_player.tscn" id="1_uwrxv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bkgj8qpcyct1r" path="res://assets/sprites/blocks/WoodScaffolding.png" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://bgh8uctivxuq4" path="res://scenes/score.gd" id="3_u5sy4"]
 [ext_resource type="Script" uid="uid://vlf3hfjdkavu" path="res://scenes/timer.gd" id="4_0tnpc"]
+[ext_resource type="AudioStream" uid="uid://djt3rgtbxghlh" path="res://assets/audio/music/ost (Cover).mp3" id="4_264po"]
 [ext_resource type="PackedScene" uid="uid://jba7jy3f42ll" path="res://scenes/characters/enemy.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://c4rs8re8iqp4a" path="res://scenes/enemies.gd" id="5_p57ef"]
 [ext_resource type="Shader" uid="uid://v58d8t0ui5c5" path="res://scenes/woble.gdshader" id="8_ca42v"]
@@ -293,6 +294,11 @@ volume_db = -16.271
 [node name="win" type="AudioStreamPlayer" parent="audio"]
 stream = ExtResource("11_dinhu")
 volume_db = -15.45
+
+[node name="background" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("4_264po")
+volume_db = -20.0
+mix_target = 1
 
 [node name="background" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
