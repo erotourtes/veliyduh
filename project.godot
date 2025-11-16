@@ -83,7 +83,7 @@ transform={
 
 [physics]
 
-2d/default_gravity=1800.0
+2d/default_gravity=12000.0
 
 [rendering]
 

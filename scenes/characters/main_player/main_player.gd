@@ -172,32 +172,66 @@ func updatePlayerAnimation() -> void:
 		animation_player.play("idle_body_" + handType + "_hand")
 	
 	
-func handleVelocityChange(delta: float) -> void:
-	var gravity := get_gravity().y * PIXEL_MULTIPILER
-	var gravityHop = 1.0
-	if abs(velocity.y) < 60.0 and velocity.y < 0:
-		gravityHop = 0.4
 
+
+
+
+var movingUpTimer: float = 0.0
+const RECOIL_DURATION: float = 1
+
+func handleVelocityChange(delta: float) -> void:
+	var gravity := get_gravity().y
+	
+	if is_on_floor():
+		movingUpTimer = 0
+	if movingUpTimer < RECOIL_DURATION:
+		movingUpTimer = min(movingUpTimer + delta, RECOIL_DURATION)
+	
 	if velocity.y > 0:
-		recoilForce.y = JUMP_VELOCITY * 0.1
-	if recoilForce.y != 0:
-		var verticalMultiplier = abs(velocity.y / JUMP_VELOCITY)
-		velocity.y += recoilForce.y * verticalMultiplier
-		recoilForce = recoilForce.lerp(Vector2.ZERO, 0.3)
-	
+		recoilForce.y = 0
+
+	if velocity.y <= 0:
+		var timeWeight := (RECOIL_DURATION - movingUpTimer) / RECOIL_DURATION
+		var jumpWieght: float = clamp((velocity.y / JUMP_VELOCITY), 0.0, 1.0)
+		if is_on_floor():
+			jumpWieght = 0.3
+		var weight = timeWeight * jumpWieght
+		
+		var boost: float = lerp(recoilForce.y, 0.0, 1 - weight)
+		print(timeWeight, " ", jumpWieght, " ", weight, " ", boost)
+		velocity.y += boost
+		velocity.y = clamp(velocity.y, -abs(JUMP_VELOCITY) * 1, 0.0)
+
+
 	if isFlying:
-		var gravitySoftness := 0.25
-		if velocity.y < 0:
-			velocity.y -= 200.0 * PIXEL_MULTIPILER * delta
-		
-		velocity.y += gravity * gravitySoftness * delta
-		velocity.y = clamp(velocity.y, -20 * PIXEL_MULTIPILER, 150 * PIXEL_MULTIPILER)
-		
+		var shouldSoftenStrongFall := velocity.y > 300
+		if shouldSoftenStrongFall:
+			velocity.y = 300
+
+		var shouldHaveLift := velocity.y < 0
+		if shouldHaveLift:
+			velocity.y -= 200 * delta
+
+		velocity.y += gravity * 0.3 * delta
+		velocity.y = clamp(velocity.y, -200, 600*PIXEL_MULTIPILER)
+
 	elif not is_on_floor():
+		var gravityHop := 1.0
+		if velocity.y < 30 * PIXEL_MULTIPILER:
+			gravityHop = 0.4
+
 		velocity.y += gravity * gravityHop * delta
-	
-		
+
 	if direction:
-		velocity.x = direction * SPEED + recoilForce.x
+		velocity.x = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED) + recoilForce.x
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+	var recoilXmultpilier = 1.0
+	if not is_on_floor():
+		recoilXmultpilier = 2.0
+	velocity.x += clamp(recoilForce.x * recoilXmultpilier, -SPEED * 5, SPEED * 5)
+	
+	
+	recoilForce = recoilForce.lerp(Vector2.ZERO, 0.6)
+	# recoilForce = Vector2.ZERO

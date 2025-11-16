@@ -9,8 +9,8 @@ const HAND_ALIGNMENT = Vector2(
 )
 
 const RECOIL_FORCE = Vector2(
-	-500*Globals.PIXEL_MULTIPILER, 
-	-100*Globals.PIXEL_MULTIPILER
+	-350*Globals.PIXEL_MULTIPILER, 
+	-250*Globals.PIXEL_MULTIPILER
 )
 
 func setup() -> Node:
@@ -23,4 +23,4 @@ func get_hand_alighnemnt() -> Vector2:
 func start_firing():
 	var recoilForce = Vector2(RECOIL_FORCE)
 	recoilForce.x *= player.playerDirection
-	player.recoilForce += recoilForce
+	player.recoilForce = recoilForce
