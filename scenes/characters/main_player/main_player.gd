@@ -19,6 +19,7 @@ signal poisonedSignal
 var isFlying := false
 var weapon: WeaponBase = null
 var playerDirection = 1
+var isLockingDirection = false
 
 var recoilForce: Vector2 = Vector2.ZERO
 
@@ -58,12 +59,13 @@ func _physics_process(delta: float) -> void:
 	
 	handleVelocityChange(delta)
 	
-	if isMovingLeft:
-		playerDirection = -1
-		visuals.scale.x = -1
-	if isMovingRight:
-		playerDirection = 1
-		visuals.scale.x = 1
+	if not isLockingDirection:
+		if isMovingLeft:
+			playerDirection = -1
+			visuals.scale.x = -1
+		if isMovingRight:
+			playerDirection = 1
+			visuals.scale.x = 1
 
 	
 	updatePlayerAnimation()
@@ -80,6 +82,11 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("fire"):
 		if weapon != null:
 			weapon.stop_firing()
+			
+	if event.is_action_pressed("lock_direction"):
+		isLockingDirection = true
+	if event.is_action_released("lock_direction"):
+		isLockingDirection = false	
 	
 
 func handleFire():
@@ -242,6 +249,8 @@ func handleVelocityChange(delta: float) -> void:
 	var recoilXmultpilier = 1.0
 	if not is_on_floor():
 		recoilXmultpilier = 2.0
+	if isSitting:
+		recoilXmultpilier *= 1.3
 	velocity.x += clamp(recoilForce.x * recoilXmultpilier, -SPEED * 5, SPEED * 5)
 	
 	
