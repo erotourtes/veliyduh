@@ -5,6 +5,7 @@ var PIXEL_MULTIPILER: int = Globals.PIXEL_MULTIPILER
 var SPEED := 212 * PIXEL_MULTIPILER
 var JUMP_VELOCITY := -225 * PIXEL_MULTIPILER
 
+@export var bulletContainer: Node
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var visuals: Node2D = $visuals
@@ -74,6 +75,8 @@ func _input(event: InputEvent) -> void:
 		handleFire()
 	if event.is_action_pressed("pick"):
 		handlePick()
+	if event.is_action_released("fire"):
+		weapon.stop_firing()
 	
 
 func handleFire():
@@ -82,7 +85,8 @@ func handleFire():
 	
 	weapon.start_firing()
 	
-	
+func take_damage():
+	print("damage taken")	
 	
 func handlePick():
 	if weapon != null:
@@ -93,8 +97,9 @@ func handlePick():
 		weapon = null
 		return
 	
-	weapon = Magnum.new()
-	var scene := weapon.setup()
+	var scene = Magnum.SCENE.instantiate()
+	weapon = scene as WeaponBase
+	weapon.setup(bulletContainer)
 	scene.position = weapon.get_hand_alighnemnt()
 	weaponNode.add_child(scene)
 	
@@ -198,7 +203,7 @@ func handleVelocityChange(delta: float) -> void:
 		var weight = timeWeight * jumpWieght
 		
 		var boost: float = lerp(recoilForce.y, 0.0, 1 - weight)
-		print(timeWeight, " ", jumpWieght, " ", weight, " ", boost)
+		# print(timeWeight, " ", jumpWieght, " ", weight, " ", boost)
 		velocity.y += boost
 		velocity.y = clamp(velocity.y, -abs(JUMP_VELOCITY) * 1, 0.0)
 

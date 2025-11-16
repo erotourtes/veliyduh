@@ -1,8 +1,8 @@
-extends Node2D
+extends CharacterBody2D
 class_name WeaponBase
 
 var player: MainPlayer
-
+var bulletContainer: Node
 
 
 func pick(player):
@@ -20,9 +20,8 @@ func weapon_update(delta):
 func get_hand_alighnemnt() -> Vector2:
 	return Vector2.ZERO
 	
-func setup() -> Node:
+func setup(bulletContainer: Node) -> void:
 	assert(false, "Should impllement setup method")
-	return null
-	
+
 func desintegrate():
 	queue_free()

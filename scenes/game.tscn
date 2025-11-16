@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://b783vko3i68tg"]
+[gd_scene load_steps=9 format=4 uid="uid://b783vko3i68tg"]
 
 [ext_resource type="PackedScene" uid="uid://cptygp7bqik5p" path="res://scenes/characters/main_player/main_player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c62x65ghn5eyo" path="res://assets/sprites/blocks/SpookyTileset.png" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://bkgj8qpcyct1r" path="res://assets/sprites/blocks/WoodScaffolding.png" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://jba7jy3f42ll" path="res://scenes/characters/enemy.tscn" id="5_iywne"]
+[ext_resource type="Script" uid="uid://c4rs8re8iqp4a" path="res://scenes/enemies.gd" id="5_p57ef"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -91,13 +92,13 @@ texture_region_size = Vector2i(198, 198)
 3:5/0 = 0
 3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-99, -99, 99, -99, 99, 99, -99, 99)
 4:5/0 = 0
-4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-62.5, -99, 63.5, -99, 59.5, 99, -63.5, 99)
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-58.948715, -99, 58.9487, -99, 63.235867, 99, -61.0923, 99)
 5:5/0 = 0
-5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-99, -99, 63.5, -99, 59.5, 99, -103.5, 106)
+5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-99, -99, 99, -99, 99, 99, -99, 99)
 1:6/0 = 0
 1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-99, -99, 99, -99, 99, 99, -99, 99)
 2:6/0 = 0
-2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-62.5, -99, 63.5, -99, 59.5, 99, -63.5, 99)
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-58.948715, -99, 58.9487, -99, 63.235867, 99, -61.0923, 99)
 3:6/0 = 0
 3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-99, -99, 99, -99, 99, 99, -99, 99)
 4:6/0 = 0
@@ -219,6 +220,7 @@ texture_region_size = Vector2i(198, 198)
 4:7/0 = 0
 4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-99, -99, 99, -99, 99, 12.999992, -99, 11)
 6:7/0 = 0
+6:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-99, -99, 99, -99, 99, 12.999992, -99, 11)
 7:7/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_lbhrr"]
@@ -228,9 +230,11 @@ sources/1 = SubResource("TileSetAtlasSource_lnu2h")
 sources/2 = SubResource("TileSetAtlasSource_lbhrr")
 
 [node name="Scene" type="Node2D"]
+metadata/_edit_lock_ = true
 
-[node name="main_player" parent="." instance=ExtResource("1_uwrxv")]
-position = Vector2(679, -3195)
+[node name="main_player" parent="." node_paths=PackedStringArray("bulletContainer") instance=ExtResource("1_uwrxv")]
+position = Vector2(1076, -2183)
+bulletContainer = NodePath("../bullets_container")
 
 [node name="Camera2D" type="Camera2D" parent="main_player"]
 position = Vector2(18, -174)
@@ -238,11 +242,40 @@ zoom = Vector2(0.1, 0.1)
 
 [node name="Blocks" type="TileMapLayer" parent="."]
 use_parent_material = true
-tile_map_data = PackedByteArray("AAD//wAAAQADAAAAAAD+/wAAAQADAAAAAAD9/wAAAQADAAAAAAAAAAAAAQADAAAAAAABAAAAAQADAAAAAAACAAAAAQADAAAAAAD8/wAAAQAAAAQAAAADAAAAAQAFAAQAAAAEAAAAAgACAAMAAAAFAAAAAgADAAMAAAAGAAAAAgADAAMAAAAHAAAAAgAEAAMAAAAGAP//AgADAAIAAAAGAP7/AgADAAIAAAAGAP3/AgADAAIAAAAGAPz/AgADAAIAAAAGAPv/AgADAAIAAAAGAPr/AgADAAAAAAAHAPr/AgAFAAQAAAAFAPr/AgAAAAQAAAAEAPr/AQAFAAQAAAADAPr/AQADAAQAAAACAPr/AQADAAQAAAABAPr/AQADAAQAAAAAAPr/AQADAAQAAAD///n/AQAEAAAAAAD///r/AQAEAAIAAAD+//r/AQAFAAIAAAD///v/AQAEAAMAAAD+//v/AQADAAMAAAD9//v/AQADAAMAAAD8//v/AQADAAMAAAD7//v/AQADAAMAAAD6//r/AQACAAIAAAD6//n/AQACAAAAAAD6//v/AQACAAMAAAD9//r/AQABAAIAAAD8//r/AQABAAIAAAD7//r/AQABAAIAAAD7//n/AQABAAEAAAD8//n/AQABAAEAAAD9//n/AQABAAEAAAD+//n/AQABAAEAAAADAPD/AQAAAAQAAAAEAPD/AQABAAQAAAAFAPD/AQABAAQAAAAGAPD/AQABAAQAAAAHAPD/AQABAAQAAAAIAPD/AQABAAQAAAAJAPD/AQAFAAQAAAA=")
+tile_map_data = PackedByteArray("AAD//wAAAQABAAcAAAD+/wAAAQADAAAAAAD9/wAAAQADAAAAAAAAAAAAAQADAAAAAAABAAAAAQADAAAAAAACAAAAAQADAAAAAAD8/wAAAQAAAAQAAAADAAAAAQAFAAQAAAAEAAAAAgACAAMAAAAFAAAAAgADAAMAAAAGAAAAAgADAAMAAAAHAAAAAgAEAAMAAAAGAP//AgADAAIAAAAGAP7/AgADAAIAAAAGAP3/AgADAAIAAAAGAPz/AgADAAIAAAAGAPv/AgADAAIAAAAGAPr/AgADAAAAAAAHAPr/AgAFAAQAAAAFAPr/AgAAAAQAAAAEAPr/AQAFAAQAAAADAPr/AQADAAQAAAACAPr/AQADAAQAAAABAPr/AQADAAQAAAAAAPr/AQADAAQAAAD///n/AQAEAAAAAAD///r/AQAEAAIAAAD+//r/AQAFAAIAAAD///v/AQAEAAMAAAD+//v/AQAHAAIAAAD9//v/AQADAAMAAAD8//v/AQADAAMAAAD7//v/AQADAAMAAAD6//r/AQACAAIAAAD6//n/AQACAAAAAAD6//v/AQACAAMAAAD9//r/AQABAAIAAAD8//r/AQABAAIAAAD7//r/AQABAAIAAAD7//n/AQABAAEAAAD8//n/AQABAAEAAAD9//n/AQABAAEAAAD+//n/AQABAAEAAAADAPD/AQAAAAQAAAAEAPD/AQABAAQAAAAFAPD/AQABAAQAAAAGAPD/AgAFAAEAAAAHAPD/AQABAAQAAAAIAPD/AQABAAQAAAAJAPD/AQAFAAQAAAAMAPn/AQACAAYAAAAMAPj/AQABAAYAAAAMAPr/AQAEAAUAAAAMAP7/AQACAAYAAAAMAP3/AQACAAYAAAAMAPz/AQABAAYAAAAMAP//AQAEAAUAAAAOAP3/AgAAAAQAAAAPAP3/AgABAAQAAAAQAP3/AgABAAQAAAARAP3/AgAFAAQAAAAGAPH/AgAFAAIAAAAGAPL/AgAFAAIAAAAGAPP/AgAFAAIAAAAGAPT/AgAFAAIAAAAGAPX/AgAFAAMAAAAFAPX/AgACAAMAAAAHAPX/AgAEAAMAAAD3//7/AQACAAQAAAD3////AQACAAYAAAD2//7/AQABAAQAAAD1//7/AQAAAAQAAAD4//7/AQAFAAQAAAD3/wAAAQAEAAUAAAD+//z/AQAEAAUAAAD/////AQABAAYAAAA=")
 tile_set = SubResource("TileSet_lbhrr")
-
-[node name="Enemy" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(302, -282)
 
 [node name="bullets_container" type="Node" parent="."]
 unique_name_in_owner = true
+
+[node name="enemies" type="Node" parent="."]
+script = ExtResource("5_p57ef")
+enemy_scene = ExtResource("5_iywne")
+
+[node name="enemies_container" type="Node" parent="enemies"]
+
+[node name="positions_container" type="Node" parent="enemies"]
+
+[node name="1" type="Marker2D" parent="enemies/positions_container"]
+position = Vector2(905, 0)
+
+[node name="2" type="Marker2D" parent="enemies/positions_container"]
+position = Vector2(494, -1191)
+
+[node name="3" type="Marker2D" parent="enemies/positions_container"]
+position = Vector2(3208, -619)
+
+[node name="4" type="Marker2D" parent="enemies/positions_container"]
+position = Vector2(1417, -2179)
+
+[node name="5" type="Marker2D" parent="enemies/positions_container"]
+position = Vector2(1757, -3187)
+
+[node name="6" type="Marker2D" parent="enemies/positions_container"]
+position = Vector2(833, -3169)
+
+[node name="7" type="Marker2D" parent="enemies/positions_container"]
+position = Vector2(-973, -1393)
+
+[node name="8" type="Marker2D" parent="enemies/positions_container"]
+position = Vector2(-1934, -419)

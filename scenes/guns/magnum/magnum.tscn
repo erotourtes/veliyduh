@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5b6db7p2220i"]
+[gd_scene load_steps=3 format=3 uid="uid://b5b6db7p2220i"]
 
+[ext_resource type="Script" uid="uid://c83dt6y8g4sn5" path="res://scenes/guns/magnum/magnum.gd" id="1_7pms1"]
 [ext_resource type="Texture2D" uid="uid://ciy0yfo1anwl8" path="res://assets/sprites/guns/magnum.png" id="1_dfgxd"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 4
+script = ExtResource("1_7pms1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(54, -30)
@@ -12,5 +14,5 @@ texture = ExtResource("1_dfgxd")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(23, 0, 72, -25, 79, -42, 118, -43, 119, -60, 30, -60, -1, -19, 0, 0)
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="muzzle" type="Marker2D" parent="."]
 position = Vector2(120, -51)
