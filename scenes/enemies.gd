@@ -5,8 +5,8 @@ extends Node
 
 @export var enemy_scene: PackedScene           # assign your Enemy.tscn
 @export var spawn_interval := 2.0              # seconds between spawns
-@export var max_enemies := 5                   # total alive at once
-@export var enemy_lifetime := 8.0              # auto-despawn time
+@export var max_enemies := 4                   # total alive at once
+@export var enemy_lifetime := 7.0              # auto-despawn time
 
 signal score(score: int)
 

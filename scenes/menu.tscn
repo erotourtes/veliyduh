@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3w1vkpdbts8k"]
+
+[ext_resource type="FontFile" uid="uid://cqhyrvjf2fuoy" path="res://assets/fonts/GamepauseddemoRegular-RpmY6.ttf" id="1_yqeox"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vjb58"]
+font = ExtResource("1_yqeox")
+font_size = 160
+
+[sub_resource type="LabelSettings" id="LabelSettings_con2f"]
+font = ExtResource("1_yqeox")
+font_size = 160
+
+[node name="score" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 645.0
+offset_bottom = 358.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="time" type="Label" parent="CenterContainer/HBoxContainer" groups=["time_label"]]
+layout_mode = 2
+text = "Time: 00.00.000"
+label_settings = SubResource("LabelSettings_vjb58")
+
+[node name="score" type="Label" parent="CenterContainer/HBoxContainer" groups=["score_label"]]
+layout_mode = 2
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_con2f")
+
+[node name="retry" type="Button" parent="CenterContainer/HBoxContainer" groups=["retry_button"]]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_yqeox")
+theme_override_font_sizes/font_size = 160
+text = "Retry"

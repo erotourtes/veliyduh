@@ -76,7 +76,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pick"):
 		handlePick()
 	if event.is_action_released("fire"):
-		weapon.stop_firing()
+		if weapon != null:
+			weapon.stop_firing()
 	
 
 func handleFire():
