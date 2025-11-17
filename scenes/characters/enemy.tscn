@@ -1,17 +1,102 @@
-[gd_scene load_steps=6 format=3 uid="uid://jba7jy3f42ll"]
+[gd_scene load_steps=12 format=3 uid="uid://jba7jy3f42ll"]
 
-[ext_resource type="Texture2D" uid="uid://dtc0hj6r80m3m" path="res://assets/sprites/characters/enemy.png" id="1_7jb55"]
 [ext_resource type="Script" uid="uid://kh1nj02a6i5u" path="res://scenes/characters/enemy.gd" id="1_fulqv"]
+[ext_resource type="Texture2D" uid="uid://lov7tw8y0yoy" path="res://assets/sprites/characters/enemy_sprite_sheet.png" id="2_jgk6k"]
 [ext_resource type="Script" uid="uid://txomx41mai01" path="res://scenes/characters/enemy_area_script.gd" id="3_f2e6v"]
 [ext_resource type="PackedScene" uid="uid://yq8teyp46jh4" path="res://scenes/killzone.tscn" id="3_jgk6k"]
 [ext_resource type="AudioStream" uid="uid://b3r2aos5yf5bj" path="res://assets/audio/sounds/hollowMetalHit.wav" id="4_21x0f"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3k4es"]
+atlas = ExtResource("2_jgk6k")
+region = Rect2(0, 0, 408, 612)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5khh"]
+atlas = ExtResource("2_jgk6k")
+region = Rect2(408, 0, 408, 612)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ag5d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3k4es")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5khh")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_jgk6k"]
+resource_name = "active"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 2.4622886),
+"update": 0,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05)]
+}
+
+[sub_resource type="Animation" id="Animation_3k4es"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3k4es"]
+_data = {
+&"RESET": SubResource("Animation_3k4es"),
+&"active": SubResource("Animation_jgk6k")
+}
+
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_fulqv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-2, -275)
-texture = ExtResource("1_7jb55")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6, -280)
+sprite_frames = SubResource("SpriteFrames_0ag5d")
+animation = &"active"
 
 [node name="killzone" parent="." instance=ExtResource("3_jgk6k")]
 
@@ -33,7 +118,7 @@ volume_db = -10.087
 [node name="vision" type="RayCast2D" parent="."]
 position = Vector2(-21, -352)
 target_position = Vector2(203, -203)
-collision_mask = 2
+collision_mask = 3
 
 [node name="POV" type="Area2D" parent="."]
 collision_layer = 0
@@ -42,6 +127,11 @@ collision_mask = 2
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="POV"]
 position = Vector2(296, -385)
 polygon = PackedVector2Array(1322, 502, 1049, -757, -197, 31, 346, 323)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3k4es")
+}
 
 [connection signal="body_entered" from="POV" to="." method="_on_pov_body_entered"]
 [connection signal="body_exited" from="POV" to="." method="_on_pov_body_exited"]

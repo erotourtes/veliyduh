@@ -51,6 +51,9 @@ func spawn_enemy():
 
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = pos.global_position
+	var isFlipped = randf() > 0.5
+	if isFlipped:
+		enemy.scale.x = -1
 	enemies_container.add_child(enemy)
 
 	# assign lifetime & signal
