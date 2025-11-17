@@ -5,16 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://tsg3engpvs7x" path="res://assets/sprites/background/background_layer_1.png" id="2_ca42v"]
 [ext_resource type="FontFile" uid="uid://cqhyrvjf2fuoy" path="res://assets/fonts/GamepauseddemoRegular-RpmY6.ttf" id="2_p57ef"]
 [ext_resource type="Texture2D" uid="uid://c62x65ghn5eyo" path="res://assets/sprites/blocks/SpookyTileset.png" id="2_yqjtg"]
+[ext_resource type="AudioStream" uid="uid://dmqefssufi51p" path="res://assets/audio/sounds/won.mp3" id="3_264po"]
 [ext_resource type="Texture2D" uid="uid://bkgj8qpcyct1r" path="res://assets/sprites/blocks/WoodScaffolding.png" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://bgh8uctivxuq4" path="res://scenes/score.gd" id="3_u5sy4"]
 [ext_resource type="Script" uid="uid://vlf3hfjdkavu" path="res://scenes/timer.gd" id="4_0tnpc"]
-[ext_resource type="AudioStream" uid="uid://djt3rgtbxghlh" path="res://assets/audio/music/ost (Cover).mp3" id="4_264po"]
+[ext_resource type="AudioStream" uid="uid://bagtjp1ocpmn2" path="res://assets/audio/music/main_theme.mp3" id="4_264po"]
 [ext_resource type="PackedScene" uid="uid://jba7jy3f42ll" path="res://scenes/characters/enemy.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://c4rs8re8iqp4a" path="res://scenes/enemies.gd" id="5_p57ef"]
 [ext_resource type="Shader" uid="uid://v58d8t0ui5c5" path="res://scenes/woble.gdshader" id="8_ca42v"]
 [ext_resource type="Shader" uid="uid://c2sphapm7hvwp" path="res://scenes/blur.gdshader" id="8_rysoc"]
 [ext_resource type="AudioStream" uid="uid://cta66n5nwyjyp" path="res://assets/audio/sounds/challengeLose.wav" id="10_kvpfn"]
-[ext_resource type="AudioStream" uid="uid://bo1oj2e8qugwu" path="res://assets/audio/sounds/developerWin.wav" id="11_dinhu"]
 [ext_resource type="Shader" uid="uid://vu1um2ir4p2s" path="res://scenes/background.gdshader" id="12_kvuet"]
 [ext_resource type="PackedScene" uid="uid://b3w1vkpdbts8k" path="res://scenes/menu.tscn" id="13_trtic"]
 [ext_resource type="Texture2D" uid="uid://c7crusc1xqqx3" path="res://assets/sprites/background/background_layer_2.png" id="14_trtic"]
@@ -292,7 +292,7 @@ stream = ExtResource("10_kvpfn")
 volume_db = -16.271
 
 [node name="win" type="AudioStreamPlayer" parent="audio"]
-stream = ExtResource("11_dinhu")
+stream = ExtResource("3_264po")
 volume_db = -15.45
 
 [node name="background" type="AudioStreamPlayer" parent="audio"]

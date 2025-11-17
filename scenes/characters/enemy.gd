@@ -22,6 +22,7 @@ func _physics_process(delta: float) -> void:
 		animation_player.stop()
 		return
 	vision.target_position = vision.to_local(player.global_position)
+	vision.target_position.y -= 200
 	vision.force_raycast_update()
 	
 	if not vision.is_colliding() or vision.get_collider() != player:
