@@ -55,4 +55,5 @@ jobs:
             build/windows/* \
             build/linux/* \
             build/mac/* \
+            --repo "${{ github.repository }}" \
             --clobber
