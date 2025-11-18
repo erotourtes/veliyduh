@@ -11,7 +11,7 @@ font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_1rrv8"]
 font = ExtResource("2_8twl8")
-font_size = 45
+font_size = 40
 
 [sub_resource type="Animation" id="Animation_ir5dn"]
 length = 0.001
@@ -151,11 +151,11 @@ label_settings = SubResource("LabelSettings_ir5dn")
 
 [node name="skip" type="Label" parent="."]
 layout_mode = 0
-offset_left = 177.0
-offset_top = 41.0
-offset_right = 665.0
-offset_bottom = 92.0
-text = "Press Any key to skip"
+offset_left = 187.0
+offset_top = 54.0
+offset_right = 671.0
+offset_bottom = 100.0
+text = "Press Enter key to skip"
 label_settings = SubResource("LabelSettings_1rrv8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
