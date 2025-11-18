@@ -1382,6 +1382,7 @@ metadata/_edit_lock_ = true
 position = Vector2(0, -183)
 sprite_frames = SubResource("SpriteFrames_gv8u8")
 animation = &"moving_body"
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="visuals/body"]
 root_node = NodePath("../../..")

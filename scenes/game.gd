@@ -62,13 +62,28 @@ func _on_enemies_score(score: int) -> void:
 	
 func _on_retry_button_pressed():
 	get_tree().paused = false
+	
+	var tweenLose := create_tween()
+	tweenLose.tween_property(lose, "volume_db", linear_to_db(0.01), 0.25) # fade over 0.25s
+	
+	var tweenWin := create_tween()
+	tweenWin.tween_property(lose, "volume_db", linear_to_db(0.01), 0.25) # fade over 0.25s
+	await tweenLose.finished
+	await tweenWin.finished
+	
 	get_tree().reload_current_scene()
 
 
 func _on_main_player_died() -> void:
 	var someColor = Color(0.71, 0.217, 0.242, 1.0) 
 	timeLabel.label_settings.font_color = someColor
+	
+	
+	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property(lose, "volume_db", linear_to_db(0.3), 2.0).from(linear_to_db(0.001))
 	lose.play()
+	
 	handle_game_over()
 
 func _on_timer_ended() -> void:

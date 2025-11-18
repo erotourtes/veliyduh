@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://f213ecb46ptc" path="res://scenes/game.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cptygp7bqik5p" path="res://scenes/characters/main_player/main_player.tscn" id="1_uwrxv"]
+[ext_resource type="AudioStream" uid="uid://b4q31gxo0dhip" path="res://assets/audio/music/lost.mp3" id="2_264po"]
 [ext_resource type="Texture2D" uid="uid://tsg3engpvs7x" path="res://assets/sprites/background/background_layer_1.png" id="2_ca42v"]
 [ext_resource type="FontFile" uid="uid://cqhyrvjf2fuoy" path="res://assets/fonts/GamepauseddemoRegular-RpmY6.ttf" id="2_p57ef"]
 [ext_resource type="Texture2D" uid="uid://c62x65ghn5eyo" path="res://assets/sprites/blocks/SpookyTileset.png" id="2_yqjtg"]
@@ -14,7 +15,6 @@
 [ext_resource type="Script" uid="uid://c4rs8re8iqp4a" path="res://scenes/enemies.gd" id="5_p57ef"]
 [ext_resource type="Shader" uid="uid://v58d8t0ui5c5" path="res://scenes/woble.gdshader" id="8_ca42v"]
 [ext_resource type="Shader" uid="uid://c2sphapm7hvwp" path="res://scenes/blur.gdshader" id="8_rysoc"]
-[ext_resource type="AudioStream" uid="uid://cta66n5nwyjyp" path="res://assets/audio/sounds/challengeLose.wav" id="10_kvpfn"]
 [ext_resource type="Shader" uid="uid://vu1um2ir4p2s" path="res://scenes/background.gdshader" id="12_kvuet"]
 [ext_resource type="PackedScene" uid="uid://b3w1vkpdbts8k" path="res://scenes/menu.tscn" id="13_trtic"]
 [ext_resource type="Texture2D" uid="uid://c7crusc1xqqx3" path="res://assets/sprites/background/background_layer_2.png" id="14_trtic"]
@@ -288,8 +288,8 @@ metadata/_edit_lock_ = true
 process_mode = 3
 
 [node name="lose" type="AudioStreamPlayer" parent="audio"]
-stream = ExtResource("10_kvpfn")
-volume_db = -16.271
+stream = ExtResource("2_264po")
+volume_db = -18.437
 
 [node name="win" type="AudioStreamPlayer" parent="audio"]
 stream = ExtResource("3_264po")

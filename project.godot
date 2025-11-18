@@ -11,12 +11,13 @@ config_version=5
 [application]
 
 config/name="Veliyduh"
-config/version="0.0.1s"
+config/version="0.0.1"
 run/main_scene="uid://ttj3p2qyr6ac"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0.14901961, 0.03529412, 0.1254902, 1)
 boot_splash/show_image=false
-config/icon="uid://dhp38kx314ai6"
+boot_splash/image="uid://5t1fgoh0b66o"
+config/icon="uid://5t1fgoh0b66o"
 
 [autoload]
 
