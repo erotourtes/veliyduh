@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=3 format=3 uid="uid://bgvv0uis51200"]
+
+[ext_resource type="FontFile" uid="uid://cqhyrvjf2fuoy" path="res://assets/fonts/GamepauseddemoRegular-RpmY6.ttf" id="1_fhbkr"]
+[ext_resource type="FontFile" uid="uid://ds6b4jkn4rhr5" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_nd7fx"]
+
+[resource]
+fallbacks = Array[Font]([ExtResource("2_nd7fx")])
+base_font = ExtResource("1_fhbkr")

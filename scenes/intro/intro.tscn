@@ -1,16 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://ttj3p2qyr6ac"]
+[gd_scene load_steps=11 format=3 uid="uid://ttj3p2qyr6ac"]
 
 [ext_resource type="Script" uid="uid://cdht1avvn3djx" path="res://scenes/intro/intro.gd" id="1_iatiw"]
 [ext_resource type="FontFile" uid="uid://cqhyrvjf2fuoy" path="res://assets/fonts/GamepauseddemoRegular-RpmY6.ttf" id="2_8twl8"]
+[ext_resource type="FontVariation" uid="uid://bgvv0uis51200" path="res://resources/new_font_variation.tres" id="2_ir5dn"]
 [ext_resource type="Texture2D" uid="uid://dgf7tw37wykaj" path="res://assets/story/story.png" id="2_teox7"]
 [ext_resource type="AudioStream" uid="uid://bttjp62xblr70" path="res://assets/audio/music/timpany.mp3" id="3_teox7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ir5dn"]
-font = ExtResource("2_8twl8")
+font = ExtResource("2_ir5dn")
 font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_1rrv8"]
-font = ExtResource("2_8twl8")
+font = ExtResource("2_ir5dn")
 font_size = 40
 
 [sub_resource type="Animation" id="Animation_ir5dn"]

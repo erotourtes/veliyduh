@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b3w1vkpdbts8k"]
 
-[ext_resource type="FontFile" uid="uid://cqhyrvjf2fuoy" path="res://assets/fonts/GamepauseddemoRegular-RpmY6.ttf" id="1_yqeox"]
+[ext_resource type="FontVariation" uid="uid://bgvv0uis51200" path="res://resources/new_font_variation.tres" id="1_yqeox"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vjb58"]
 font = ExtResource("1_yqeox")
