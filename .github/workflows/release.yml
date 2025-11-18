@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  release:
+    types: [prereleased, released]
+
+permissions:
+  contents: write 
+
+jobs:
+  build:
+    uses: ./.github/workflows/godot-ci.yml
+    secrets: inherit
+
+  release:
+    name: Upload builds to GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show release tag
+        run: echo "Tag: ${{ github.event.release.tag_name }}"
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: windows
+          path: build/windows
+
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: linux
+          path: build/linux
+
+      - name: Download Mac artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: mac
+          path: build/mac
+
+      - name: List downloaded files
+        run: ls -R build
+
+      - name: Upload Release Assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ github.event.release.tag_name }} \
+            build/windows/* \
+            build/linux/* \
+            build/mac/* \
+            --clobber
