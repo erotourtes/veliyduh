@@ -41,13 +41,13 @@ func start_firing():
 	player.recoilForce = recoilForce
 	
 	var bullet = BULLET.instantiate()
-	bulletContainer.add_child(bullet)
-	bullet.global_position = muzzle.global_position
 	
 	var dirVec = Vector2(cos(self.rotation) * player.playerDirection, sin(self.rotation))
 	if (player.playerDirection < 0):
 		bullet.scale.x = -1
 	bullet.direction = dirVec
+	bulletContainer.add_child(bullet)
+	bullet.global_position = muzzle.global_position
 	
 	audio_stream_player.play()
 	

@@ -128,7 +128,6 @@ func _on_main_player_poisoned_signal() -> void:
 		current_wobble = MAX_WOBBLE
 		die_from_poison_timer.start(2)
 		
-	print(current_wobble)
 		
 	poison_timer.start(2)
 	show_poison_effect()
