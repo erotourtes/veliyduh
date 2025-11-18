@@ -1,19 +1,22 @@
 name: "godot-ci export"
 on: workflow_dispatch
 
-# NOTE: If your `project.godot` is at the repository root, set `PROJECT_PATH` below to ".".
-
 env:
   GODOT_VERSION: 4.5
   EXPORT_NAME: game
   PROJECT_PATH: .
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   export-windows:
     name: Windows Export
     runs-on: ubuntu-24.04  # Use 24.04 with godot 4
     container:
-      image: barichello/godot-ci:4.5.1
+      image: barichello/godot-ci:4.5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,7 +44,7 @@ jobs:
     name: Linux Export
     runs-on: ubuntu-24.04  # Use 24.04 with godot 4
     container:
-      image: barichello/godot-ci:4.5.1
+      image: barichello/godot-ci:4.5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -67,7 +70,7 @@ jobs:
     name: Web Export
     runs-on: ubuntu-24.04  # Use 24.04 with godot 4
     container:
-      image: barichello/godot-ci:4.5.1
+      image: barichello/godot-ci:4.5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -84,24 +87,26 @@ jobs:
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v4
         with:
-          name: web
           path: build/web
-      - name: Install rsync 📚
-        run: |
-          apt-get update && apt-get install -y rsync
-      - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@releases/v4
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: build/web # The folder the action should deploy.
+
+  deploy:
+    needs: export-web
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   # export-mac:
   #   name: Mac Export
   #   runs-on: ubuntu-24.04  # Use 24.04 with godot 4
   #   container:
-  #     image: barichello/godot-ci:4.5.1
+  #     image: barichello/godot-ci:4.5
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@v4
