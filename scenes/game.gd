@@ -27,6 +27,7 @@ class EndResult:
 var gameResult = EndResult.new()
 
 func _ready() -> void:
+	#sAudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
 	timer.endTime = 1 * 60
 	timer.stopped = false
 	
@@ -40,7 +41,7 @@ func _ready() -> void:
 	
 	
 func handle_game_over() -> void:
-	hide_poison_effect()
+	hide_poison_effect.call_deferred()
 	background.stop()
 	get_tree().paused = true
 		
@@ -105,6 +106,7 @@ func hide_poison_effect():
 	if wobble_tween != null:
 		wobble_tween.kill()
 	wobble_tween = get_tree().create_tween()
+	wobble_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 
 	wobble_tween.tween_property(mat, "shader_parameter/wobble_strength", 0.0, 0.3)
 	wobble_tween.tween_property(mat, "shader_parameter/tint_alpha", 0.0, 0.3)
@@ -117,6 +119,7 @@ func show_poison_effect():
 	if wobble_tween != null:
 		wobble_tween.kill()
 	wobble_tween = get_tree().create_tween()
+	wobble_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	
 	wobble_tween.tween_property(mat, "shader_parameter/wobble_strength", current_wobble, 0.03)
 	wobble_tween.tween_property(mat, "shader_parameter/tint_alpha", 0.2, 0.3)

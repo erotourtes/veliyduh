@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://b783vko3i68tg"]
+[gd_scene load_steps=30 format=4 uid="uid://b783vko3i68tg"]
 
 [ext_resource type="Script" uid="uid://f213ecb46ptc" path="res://scenes/game.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cptygp7bqik5p" path="res://scenes/characters/main_player/main_player.tscn" id="1_uwrxv"]
@@ -15,6 +15,7 @@
 [ext_resource type="FontVariation" uid="uid://bgvv0uis51200" path="res://resources/new_font_variation.tres" id="8_264po"]
 [ext_resource type="Shader" uid="uid://v58d8t0ui5c5" path="res://scenes/woble.gdshader" id="8_ca42v"]
 [ext_resource type="Shader" uid="uid://c2sphapm7hvwp" path="res://scenes/blur.gdshader" id="8_rysoc"]
+[ext_resource type="Shader" uid="uid://cyrncbx4ar55e" path="res://scenes/shader1.gdshader" id="11_1kice"]
 [ext_resource type="Shader" uid="uid://vu1um2ir4p2s" path="res://scenes/background.gdshader" id="12_kvuet"]
 [ext_resource type="PackedScene" uid="uid://b3w1vkpdbts8k" path="res://scenes/menu.tscn" id="13_trtic"]
 [ext_resource type="Texture2D" uid="uid://c7crusc1xqqx3" path="res://assets/sprites/background/background_layer_2.png" id="14_trtic"]
@@ -24,13 +25,20 @@
 font = ExtResource("8_264po")
 font_size = 160
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5newe"]
+shader = ExtResource("11_1kice")
+shader_parameter/time_speed = 1.1610000551475
+shader_parameter/swirl_strength = 2.0170000958075
+shader_parameter/zoom = 0.5
+shader_parameter/tint_color = Color(0.30747572, 0.00047476173, 0.42243418, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ir15t"]
 shader = ExtResource("12_kvuet")
-shader_parameter/swirl_strength = 0.95600004541
-shader_parameter/noise_scale = 2.194000080465
-shader_parameter/smoke_speed = 0.69900002994262
-shader_parameter/swirl_speed = 2.97500013805262
-shader_parameter/density = 0.800000038
+shader_parameter/swirl_strength = 0.798000037905
+shader_parameter/noise_scale = 2.0830000751925
+shader_parameter/smoke_speed = 1.7030000776326202
+shader_parameter/swirl_speed = 2.5250001166776204
+shader_parameter/density = 1.0
 shader_parameter/smoke_color = Color(0.89411765, 0.7764706, 0.8, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ssvqc"]
@@ -362,7 +370,18 @@ offset_top = 2183.0
 offset_right = -1036.0
 offset_bottom = 2223.0
 
+[node name="shader1" type="ColorRect" parent="main_player/Control"]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_5newe")
+layout_mode = 0
+offset_left = -2111.0
+offset_top = -4158.0
+offset_right = 4280.0
+offset_bottom = -531.0
+
 [node name="smoke" type="ColorRect" parent="main_player/Control"]
+visible = false
 material = SubResource("ShaderMaterial_ir15t")
 layout_mode = 0
 offset_left = -2337.0
@@ -381,9 +400,9 @@ offset_top = -4289.0
 offset_right = 4470.0
 offset_bottom = -425.0
 color = Color(1, 1, 1, 0)
-metadata/_edit_lock_ = true
 
 [node name="woble" type="ColorRect" parent="main_player/Control"]
+visible = false
 material = SubResource("ShaderMaterial_rysoc")
 layout_mode = 0
 offset_left = -2479.0
