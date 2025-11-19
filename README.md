@@ -1,4 +1,5 @@
 ## Veliyduh
+![flying](https://github.com/user-attachments/assets/f72da822-118f-42f6-bd5a-4512053088ce)
 
 Lore and gameplay are on good terms. More about it in the [Game Design Document](https://docs.google.com/document/d/1LgNjc635ORmILBVaYW8kN_jf2CR3n-qSx7bgfi85pj8/edit?usp=sharing)
 
